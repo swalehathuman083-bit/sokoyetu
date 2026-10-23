@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soko Yetu | Blue Economy Marketplace</title>
+<style>
+:root{--deep:#103e36;--green:#087e70;--mint:#dcefe5;--ink:#18342d;--muted:#66746e;--line:#e2e9e4;--bg:#f7f8f5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{background:var(--deep);color:#fff;padding:18px max(16px,calc((100% - 1100px)/2))}
+.brand{display:flex;align-items:center;gap:11px}.logo{display:grid;place-items:center;width:44px;height:44px;background:#c5ead4;color:var(--deep);border-radius:12px;font-size:24px}
+.brand h1{margin:0;font-size:23px}.brand small{color:#c2ded2}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}.nav button{background:transparent;color:#dbe9e4;border:0;border-radius:8px;padding:10px 12px;cursor:pointer}.nav button.active{background:#176e60;color:#fff}
+main{max-width:1100px;margin:auto;padding:22px 16px}.hero{background:var(--mint);border-radius:17px;padding:24px;margin-bottom:20px}.tag{display:inline-block;background:#e5f3eb;color:#176c50;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:bold}.hero h2{font-size:clamp(26px,5vw,38px);line-height:1.12;margin:13px 0 8px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.search{display:flex;gap:8px;margin-top:15px}.field{width:100%;padding:12px;border:1px solid #d3dfd8;border-radius:9px;background:#fff;color:var(--ink)}button{font:inherit}.btn{border:0;background:var(--green);color:#fff;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer}.outline{border:1px solid #d6e1dc;background:white;color:#174b43;border-radius:9px;padding:10px 13px;cursor:pointer}.filters{display:flex;gap:7px;overflow:auto;padding:12px 0}.pill{white-space:nowrap;border:1px solid #d8e4de;background:white;padding:8px 12px;border-radius:22px;cursor:pointer;font-size:12px}.pill.active{background:#dcefe7;border-color:var(--green);color:#07594e;font-weight:bold}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.art{height:125px;display:grid;place-items:center;font-size:56px;background:linear-gradient(140deg,#e3f1e9,#f8f1df)}.pad{padding:13px}.pad h3{font-size:15px;margin:9px 0 5px}.price{font-weight:bold;font-size:17px;margin:10px 0}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.section-title{font-size:19px;margin:0}.hidden{display:none!important}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.formgrid{display:grid;gap:13px;max-width:650px}.formgrid label{font-weight:bold;font-size:13px}.formgrid input,.formgrid select{margin-top:6px}.modal{position:fixed;inset:0;background:#0c2520aa;display:flex;align-items:center;justify-content:center;padding:15px;z-index:10}.modalbox{background:#fff;border-radius:17px;padding:22px;width:min(470px,100%);max-height:92vh;overflow:auto}.toast{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:var(--deep);color:white;padding:13px 18px;border-radius:10px;z-index:20;max-width:90%;box-shadow:0 4px 18px #0002}.footer{max-width:1100px;margin:auto;padding:0 16px 25px}.cartline{padding:13px 0;border-bottom:1px solid var(--line)}@media(max-width:650px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.art{height:95px;font-size:45px}.hero{padding:18px}.pad{padding:10px}header{padding:15px 13px}main{padding:15px 12px}.nav button{padding:9px 8px;font-size:12px}}
+
+.auth-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:24px;align-items:start;margin:8px auto 24px;max-width:940px}
+.auth-intro{background:var(--mint);border-radius:17px;padding:30px}.auth-intro h2{font-size:32px;line-height:1.15;margin:18px 0 12px}.auth-intro p{line-height:1.6}
+.auth-intro ul{padding-left:20px;line-height:1.8}.auth-card{padding:26px}.auth-card h2{margin:0 0 8px;font-size:25px}.auth-card .formgrid{gap:16px;margin-top:22px}
+.auth-card label{display:block}.auth-card .field{font:inherit;font-weight:normal}.auth-card .btn{width:100%}.auth-card .muted{margin:6px 0}.auth-switch{margin:22px 0 0;font-size:14px}
+.text-button{border:0;background:none;color:#06695d;font:inherit;font-weight:bold;cursor:pointer;padding:4px;text-decoration:underline;text-underline-offset:3px}
+.password-wrap{position:relative;display:block}.password-wrap .field{padding-right:72px}.password-toggle{position:absolute;right:6px;top:12px;background:white;border:0;border-radius:5px;padding:7px;color:#176e60;font-size:12px;cursor:pointer}
+.form-error{color:#9e2828;font-size:14px;line-height:1.5;margin:12px 0 0}.auth-note{font-size:12px;line-height:1.5;color:var(--muted);margin-top:22px}.profile-list{display:grid;grid-template-columns:100px 1fr;gap:14px;margin:25px 0}.profile-list dt{color:var(--muted)}.profile-list dd{margin:0;overflow-wrap:anywhere}
+:focus-visible{outline:3px solid #e4b341;outline-offset:3px}button:disabled{opacity:.65;cursor:wait}.auth-card h2:focus{outline:0}
+@media(max-width:650px){.auth-layout{grid-template-columns:1fr;gap:14px}.auth-intro{padding:22px}.auth-intro h2{font-size:26px}.auth-intro ul{display:none}.auth-card{padding:22px}.brand h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand"><div class="logo">🌊</div><div><h1>Soko Yetu</h1><small>Ocean to market.</small></div></div><button class="btn" id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</button></div>
+<nav class="nav"><button class="active" data-page="shop">Marketplace</button><button data-page="sell">Sell products</button><button data-page="orders">My orders</button><button data-page="account" id="accountNav">Sign up</button></nav></header>
+<main>
+<section id="shopPage"><div class="hero"><span class="tag">BLUE ECONOMY MARKETPLACE</span><h2>Fresh from our waters.<br>Closer to your table.</h2><p class="muted">Discover seafood and aquaculture products from local suppliers.</p><div class="search"><input id="search" class="field" placeholder="Search fish, seafood, supplies..." aria-label="Search products"><button class="btn" id="searchBtn">Search</button></div></div>
+<div class="row"><h2 class="section-title">Explore products</h2><span class="muted">Demo catalogue</span></div>
+<div class="filters" id="filters"><button class="pill active" data-cat="All">All</button><button class="pill" data-cat="Fish">Fish</button><button class="pill" data-cat="Seafood">Seafood</button><button class="pill" data-cat="Aquaculture">Aquaculture</button><button class="pill" data-cat="Supplies">Supplies</button></div>
+<div id="products" class="products"></div><p id="empty" class="muted hidden">No matching products. Try another search.</p>
+<div class="panel" style="margin-top:20px"><strong>🌱 Supporting sustainable blue businesses</strong><p class="muted">Choose responsibly sourced products. Supplier verification is not active in this demo.</p></div>
+</section>
+<section id="sellPage" class="hidden"><h2>Become a seller</h2><p class="muted">Add a sample listing to see how suppliers could sell through Soko Yetu.</p><form id="sellForm" class="panel formgrid"><label>Seller or business name<input class="field" name="seller" required placeholder="e.g. Bahari Fish Farm"></label><label>Product name<input class="field" name="name" required placeholder="e.g. Fresh tilapia"></label><div class="row"><label style="flex:1">Price (KSh)<input class="field" name="price" type="number" min="1" required placeholder="500"></label><label style="flex:1">Category<select class="field" name="category"><option>Fish</option><option>Seafood</option><option>Aquaculture</option><option>Supplies</option></select></label></div><label>Unit<input class="field" name="unit" required placeholder="per kg, per bag, etc."></label><label>Location<input class="field" name="location" required placeholder="e.g. Mombasa"></label><button class="btn">Publish demo listing</button><p class="muted">Demo only. This does not create a real account or publish online.</p></form></section>
+<section id="cartPage" class="hidden"><div class="row"><h2>Your basket</h2><button class="outline" id="backShop">← Shop</button></div><div id="cartItems"></div><div id="cartFoot" class="hidden"><div class="row"><span>Subtotal</span><strong id="subtotal"></strong></div><p class="muted">Delivery fee is confirmed separately with the seller.</p><button class="btn" id="checkoutBtn" style="width:100%">Continue to checkout</button></div></section>
+<section id="ordersPage" class="hidden"><h2>My orders</h2><p class="muted">Test orders in this tab. Reloading or signing out clears them.</p><div id="ordersList"></div></section>
+
+<section id="accountPage" class="hidden" aria-label="Your Soko Yetu account">
+<div class="auth-layout">
+<aside class="auth-intro"><span class="tag">JOIN SOKO YETU</span><h2>A place for our coastal community.</h2><p>Explore local seafood and aquaculture products, or try listing products for your business.</p><ul><li>Discover local suppliers</li><li>Explore fish, seafood and supplies</li><li>Try the buyer and seller experience</li></ul><p class="muted">Demo accounts are saved on this browser only. Use a test email and a password you do not use elsewhere. No verification email is sent.</p></aside>
+<div class="panel auth-card">
+<div id="signupPanel"><h2 id="signupHeading" tabindex="-1">Create your account</h2><p class="muted">Start exploring Soko Yetu.</p>
+<form id="signupForm" class="formgrid" novalidate>
+<label for="signupName">Full name<input class="field" id="signupName" name="name" autocomplete="name" maxlength="80" required placeholder="Your full name"></label>
+<label for="signupEmail">Email address<input class="field" id="signupEmail" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label>
+<label for="signupRole">I am joining as<select class="field" id="signupRole" name="role"><option value="buyer">A buyer</option><option value="seller">A seller</option></select></label>
+<div><label for="signupPassword">Password</label><div class="password-wrap"><input class="field" id="signupPassword" name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required aria-describedby="passwordHelp"><button type="button" class="password-toggle" data-password="signupPassword" aria-label="Show password" aria-pressed="false">Show</button></div><p class="muted" id="passwordHelp">Use 12 to 128 characters.</p></div>
+<div><label for="signupConfirm">Confirm password</label><div class="password-wrap"><input class="field" id="signupConfirm" name="confirm" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><button type="button" class="password-toggle" data-password="signupConfirm" aria-label="Show confirm password" aria-pressed="false">Show</button></div></div>
+<p id="signupError" class="form-error hidden" role="alert"></p><button id="signupSubmit" class="btn" type="submit">Create demo account</button>
+</form><p class="auth-switch">Already have an account? <button type="button" class="text-button" data-auth="login">Sign in</button></p></div>
+<div id="loginPanel" class="hidden"><h2 id="loginHeading" tabindex="-1">Welcome back</h2><p class="muted">Sign in to an account created in this browser.</p><form id="loginForm" class="formgrid" novalidate>
+<label for="loginEmail">Email address<input class="field" id="loginEmail" name="email" type="email" autocomplete="username" maxlength="254" required placeholder="you@example.com"></label>
+<div><label for="loginPassword">Password</label><div class="password-wrap"><input class="field" id="loginPassword" name="password" type="password" autocomplete="current-password" maxlength="128" required><button type="button" class="password-toggle" data-password="loginPassword" aria-label="Show password" aria-pressed="false">Show</button></div></div>
+<p id="loginError" class="form-error hidden" role="alert"></p><button id="loginSubmit" class="btn" type="submit">Sign in</button></form>
+<p class="auth-switch">New to Soko Yetu? <button type="button" class="text-button" data-auth="signup">Create an account</button></p><p class="auth-note">Password recovery is not available in this demo.</p></div>
+<div id="profilePanel" class="hidden"><span class="tag">SIGNED IN</span><h2 id="profileHeading" tabindex="-1" style="margin-top:14px">Your account</h2><p id="authSuccess" class="muted" role="status"></p><dl class="profile-list"><dt>Name</dt><dd id="profileName"></dd><dt>Email</dt><dd id="profileEmail"></dd><dt>Joining as</dt><dd id="profileRole"></dd></dl><button class="btn" id="accountContinue" data-page="shop">Explore marketplace</button><button class="text-button" id="logoutBtn" style="margin-top:14px">Sign out</button><p class="auth-note">This profile stays on this browser. Demo orders and listings reset when you reload; they are not saved to your account. Buyer and seller choices do not restrict access in this demo.</p></div>
+<p class="auth-note">Browser demo authentication only. A live service needs a backend for account security, verified identity and shared access across devices.</p>
+</div></div></section>
+
+</main>
+<div class="footer muted">Soko Yetu MVP prototype · Demo prices and products only · No real payments are processed.</div>
+<div id="modal" class="modal hidden"><div class="modalbox"><div class="row"><h2 style="margin:0">Checkout</h2><button id="closeModal" class="outline">✕</button></div><p class="muted">Submit a test order. No payment will be collected.</p><form id="checkoutForm" class="formgrid"><label>Full name<input class="field" name="customer" required placeholder="Your name"></label><label>Phone number<input class="field" name="phone" required type="tel" placeholder="07XX XXX XXX"></label><label>Delivery or collection location<input class="field" name="address" required placeholder="Estate, town or pickup point"></label><label>Fulfilment<select class="field" name="fulfilment"><option>Delivery (confirm fee)</option><option>Self collection</option></select></label><div class="row"><span>Subtotal</span><strong id="modalTotal"></strong></div><button class="btn">Place test order</button></form></div></div><div id="toast" class="toast hidden" role="status"></div>
+<script>
+const $=id=>document.getElementById(id);
+let products=[
+{id:1,name:"Fresh Tilapia",cat:"Fish",price:650,unit:"per kg",emoji:"🐟",seller:"Demo Fish Farm",loc:"Mombasa"},
+{id:2,name:"Whole Red Snapper",cat:"Fish",price:950,unit:"per kg",emoji:"🐠",seller:"Demo Coastal Catch",loc:"Mombasa"},
+{id:3,name:"Fresh Prawns",cat:"Seafood",price:1200,unit:"per kg",emoji:"🦐",seller:"Demo Seafood Traders",loc:"Mombasa"},
+{id:4,name:"Octopus",cat:"Seafood",price:800,unit:"per kg",emoji:"🐙",seller:"Demo Coastal Catch",loc:"Mombasa"},
+{id:5,name:"Farmed Catfish",cat:"Aquaculture",price:550,unit:"per kg",emoji:"🐟",seller:"Demo Fish Farm",loc:"Kilifi"},
+{id:6,name:"Fish Feed",cat:"Supplies",price:1800,unit:"per bag",emoji:"🪣",seller:"Demo Aqua Supplies",loc:"Mombasa"}
+];
+let cart={},orders=[],category="All",search="";
+const money=n=>"KSh "+Number(n).toLocaleString("en-KE");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const total=()=>products.reduce((s,p)=>s+p.price*(cart[p.id]||0),0);
+function toast(t){$("toast").textContent=t;$("toast").classList.remove("hidden");clearTimeout(toast.timer);toast.timer=setTimeout(()=>$("toast").classList.add("hidden"),2600)}
+function page(p){["shop","sell","cart","orders","account"].forEach(x=>$(x+"Page").classList.toggle("hidden",x!==p));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));if(p==="cart")renderCart();if(p==="orders")renderOrders();window.scrollTo(0,0)}
+function renderProducts(){let arr=products.filter(p=>(category==="All"||p.cat===category)&&(p.name+" "+p.cat+" "+p.seller+" "+p.loc).toLowerCase().includes(search.toLowerCase()));$("products").innerHTML=arr.map(p=>`<article class="card"><div class="art">${p.emoji}</div><div class="pad"><span class="tag">${esc(p.cat)}</span><h3>${esc(p.name)}</h3><div class="muted">${esc(p.loc)} · ${esc(p.unit)}</div><div class="price">${money(p.price)}</div><div class="muted">Seller: ${esc(p.seller)}</div><button class="btn" data-add="${p.id}" style="width:100%;margin-top:10px">+ Add to cart</button></div></article>`).join("");$("empty").classList.toggle("hidden",arr.length>0)}
+function renderCart(){$("cartCount").textContent=Object.values(cart).reduce((a,b)=>a+b,0);let ids=Object.keys(cart).filter(k=>cart[k]>0);$("cartItems").innerHTML=ids.length?ids.map(id=>{let p=products.find(p=>p.id==id);return `<div class="cartline"><div class="row"><div><strong>${esc(p.name)}</strong><div class="muted">${money(p.price)} · ${esc(p.unit)}</div></div><strong>${money(p.price*cart[id])}</strong></div><div class="row" style="margin-top:10px"><span class="muted">Quantity: ${cart[id]}</span><div><button class="outline" data-change="${id}" data-delta="-1">−</button> <button class="outline" data-change="${id}" data-delta="1">+</button></div></div></div>`}).join(""):'<div class="panel"><h3>Your basket is empty</h3><p class="muted">Add a product to start a test order.</p><button class="btn" id="emptyShop">Browse products</button></div>';$("cartFoot").classList.toggle("hidden",!ids.length);$("subtotal").textContent=money(total());$("cartCount").textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
+function renderOrders(){$("ordersList").innerHTML=orders.length?orders.slice().reverse().map(o=>`<div class="panel" style="margin-bottom:12px"><div class="row"><strong>Order ${o.id}</strong><span class="tag">Test order</span></div><p class="muted">${esc(o.customer)} · ${esc(o.address)} · ${esc(o.phone)}</p>${o.items.map(i=>`<div class="row" style="padding:5px 0"><span>${esc(i.name)} × ${i.qty}</span><strong>${money(i.price*i.qty)}</strong></div>`).join("")}<hr style="border:0;border-top:1px solid var(--line)"><div class="row"><span>Total</span><strong>${money(o.total)}</strong></div><p class="muted">Fulfilment: ${esc(o.fulfilment)}. No payment or seller notification sent.</p></div>`).join(""):'<div class="panel"><h3>No orders yet</h3><p class="muted">Place a test order to see it here.</p><button class="btn" id="ordersShop">Browse products</button></div>'}
+document.addEventListener("click",e=>{let b=e.target.closest("button");if(!b)return;if(b.dataset.page){page(b.dataset.page);return}if(b.dataset.cat){category=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x===b));renderProducts();return}if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;renderCart();toast("Added to basket");return}if(b.dataset.change){cart[b.dataset.change]=Math.max(0,(cart[b.dataset.change]||0)+Number(b.dataset.delta));renderCart();return}if(b.id==="cartBtn"){page("cart");return}if(["backShop","emptyShop","ordersShop"].includes(b.id)){page("shop");return}if(b.id==="searchBtn"){search=$("search").value.trim();renderProducts();return}if(b.id==="checkoutBtn"){if(!Object.values(cart).some(Boolean)){toast("Your basket is empty");return}$("modalTotal").textContent=money(total());$("modal").classList.remove("hidden");return}if(b.id==="closeModal")$("modal").classList.add("hidden")});
+$("search").addEventListener("input",()=>{search=$("search").value.trim();renderProducts()});
+$("sellForm").addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target),cat=String(f.get("category"));products.push({id:Math.max(...products.map(p=>p.id))+1,name:String(f.get("name")).trim(),cat,price:Number(f.get("price")),unit:String(f.get("unit")).trim(),emoji:cat==="Supplies"?"🪣":cat==="Seafood"?"🦐":"🐟",seller:String(f.get("seller")).trim(),loc:String(f.get("location")).trim()});e.target.reset();category="All";search="";$("search").value="";document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x.dataset.cat==="All"));renderProducts();page("shop");toast("Demo listing added")});
+$("checkoutForm").addEventListener("submit",e=>{e.preventDefault();if(!Object.values(cart).some(Boolean))return;let f=new FormData(e.target);orders.push({id:"SY-"+String(orders.length+1).padStart(3,"0"),customer:String(f.get("customer")),phone:String(f.get("phone")),address:String(f.get("address")),fulfilment:String(f.get("fulfilment")),items:products.filter(p=>cart[p.id]).map(p=>({name:p.name,price:p.price,qty:cart[p.id]})),total:total()});cart={};renderCart();e.target.reset();$("modal").classList.add("hidden");page("orders");toast("Test order saved in this session")});
+// Local demonstration only. Browser storage is not a trusted authentication boundary.
+const ACCOUNT_KEY = 'soko-yetu.demo.accounts.v1';
+const SESSION_KEY = 'soko-yetu.demo.session.v1';
+const PASSWORD_ITERATIONS = 600000;
+let currentUser = null;
+
+function readAccounts() {
+  const stored = localStorage.getItem(ACCOUNT_KEY);
+  if (!stored) return [];
+  let accounts;
+  try { accounts = JSON.parse(stored); } catch { throw new Error('Saved demo accounts could not be read. Try a separate browser profile.'); }
+  if (!Array.isArray(accounts) || accounts.some(a => !a || typeof a.id !== 'string' || typeof a.name !== 'string' || typeof a.email !== 'string' || !['buyer','seller'].includes(a.role) || !/^[0-9a-f]{32}$/.test(a.salt) || !/^[0-9a-f]{64}$/.test(a.hash))) {
+    throw new Error('Saved demo accounts could not be read. Try a separate browser profile.');
+  }
+  return accounts;
+}
+function authError(mode, message, field) {
+  const node = $(mode + 'Error');
+  node.textContent = message;
+  node.classList.toggle('hidden', !message);
+  if (field) { $(field).setAttribute('aria-invalid','true'); $(field).focus(); }
+}
+function clearAuthErrors() {
+  ['signup','login'].forEach(mode => authError(mode,''));
+  document.querySelectorAll('#signupForm input, #loginForm input').forEach(input => input.removeAttribute('aria-invalid'));
+}
+function authView(mode, focus = true) {
+  const view = currentUser ? 'profile' : mode === 'login' ? 'login' : 'signup';
+  ['signup','login','profile'].forEach(x => $(x+'Panel').classList.toggle('hidden',x!==view));
+  if (focus) $(view+'Heading').focus();
+}
+function updateAccountUI() {
+  $('accountNav').textContent = currentUser ? 'My account' : 'Sign up';
+  if (currentUser) {
+    $('profileName').textContent = currentUser.name;
+    $('profileEmail').textContent = currentUser.email;
+    $('profileRole').textContent = currentUser.role === 'seller' ? 'Seller' : 'Buyer';
+    $('accountContinue').textContent = currentUser.role === 'seller' ? 'Try a seller listing' : 'Explore marketplace';
+    $('accountContinue').dataset.page = currentUser.role === 'seller' ? 'sell' : 'shop';
+  } else {
+    ['profileName','profileEmail','profileRole','authSuccess'].forEach(id => $(id).textContent = '');
+  }
+  authView('signup',false);
+}
+function restoreAccount() {
+  try {
+    const id = sessionStorage.getItem(SESSION_KEY);
+    currentUser = id ? readAccounts().find(a => a.id === id) || null : null;
+    if (id && !currentUser) sessionStorage.removeItem(SESSION_KEY);
+  } catch { currentUser = null; }
+  updateAccountUI();
+  if (currentUser) $('authSuccess').textContent = 'You are signed in on this tab.';
+}
+function hex(bytes) { return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join(''); }
+async function passwordHash(password, salt) {
+  if (!globalThis.crypto?.subtle) throw new Error('Open this demo on localhost or HTTPS to enable account creation and sign-in.');
+  const key = await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+  const bytes = Uint8Array.from(salt.match(/.{2}/g), b => parseInt(b,16));
+  const bits = await crypto.subtle.deriveBits({name:'PBKDF2',salt:bytes,iterations:PASSWORD_ITERATIONS,hash:'SHA-256'},key,256);
+  return hex(new Uint8Array(bits));
+}
+function signInAccount(account) {
+  sessionStorage.setItem(SESSION_KEY,account.id);
+  currentUser = account;
+  $('signupForm').reset(); $('loginForm').reset();
+  document.querySelectorAll('[data-password]').forEach(b => {
+    $(b.dataset.password).type = 'password'; b.textContent = 'Show'; b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label',b.dataset.password === 'signupConfirm' ? 'Show confirm password' : 'Show password');
+  });
+  clearAuthErrors(); updateAccountUI(); page('account'); authView('profile');
+}
+function storageMessage(error) {
+  if (['SecurityError','QuotaExceededError'].includes(error.name)) return 'Browser storage is unavailable or full. Allow site storage and try again.';
+  return error.message || 'Could not save your account. Please try again.';
+}
+const validEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
+$('signupForm').addEventListener('submit',async e => {
+  e.preventDefault(); if ($('signupSubmit').disabled) return;
+  clearAuthErrors();
+  const name = $('signupName').value.trim(), email = $('signupEmail').value.trim().toLowerCase();
+  const password = $('signupPassword').value, confirm = $('signupConfirm').value, role = $('signupRole').value;
+  if (name.length < 2 || name.length > 80) return authError('signup','Enter your full name using 2 to 80 characters.','signupName');
+  if (!validEmail(email)) return authError('signup','Enter a valid email address.','signupEmail');
+  if (password.length < 12 || password.length > 128 || !password.trim()) return authError('signup','Use a password with 12 to 128 characters, not only spaces.','signupPassword');
+  if (password !== confirm) return authError('signup','Your passwords do not match.','signupConfirm');
+  if (!['buyer','seller'].includes(role)) return authError('signup','Select buyer or seller.','signupRole');
+  const button = $('signupSubmit'); button.disabled = true; button.textContent = 'Creating account…';
+  try {
+    if (readAccounts().some(a => a.email === email)) return authError('signup','An account with this email already exists in this browser. Sign in below.','signupEmail');
+    // Check storage availability before doing password derivation.
+    sessionStorage.setItem(SESSION_KEY+'.check','1'); sessionStorage.removeItem(SESSION_KEY+'.check');
+    const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
+    const hash = await passwordHash(password,salt);
+    const accounts = readAccounts();
+    if (accounts.some(a => a.email === email)) return authError('signup','An account with this email already exists in this browser. Sign in below.','signupEmail');
+    const account = {id:hex(crypto.getRandomValues(new Uint8Array(16))),name,email,role,salt,hash,createdAt:new Date().toISOString()};
+    accounts.push(account); localStorage.setItem(ACCOUNT_KEY,JSON.stringify(accounts));
+    signInAccount(account);
+    $('authSuccess').textContent = 'Your demo account is ready. You are signed in.';
+    toast('Account created');
+  } catch(error) { authError('signup',storageMessage(error)); }
+  finally { button.disabled = false; button.textContent = 'Create demo account'; }
+});
+$('loginForm').addEventListener('submit',async e => {
+  e.preventDefault(); if ($('loginSubmit').disabled) return;
+  clearAuthErrors();
+  const email = $('loginEmail').value.trim().toLowerCase(), password = $('loginPassword').value;
+  if (!validEmail(email)) return authError('login','Enter a valid email address.','loginEmail');
+  if (!password || password.length > 128) return authError('login','Enter your password.','loginPassword');
+  const button = $('loginSubmit'); button.disabled = true; button.textContent = 'Signing in…';
+  try {
+    const account = readAccounts().find(a => a.email === email);
+    if (!account || await passwordHash(password,account.salt) !== account.hash) return authError('login','Email or password is incorrect. Try again.','loginPassword');
+    signInAccount(account); $('authSuccess').textContent = 'Welcome back. You are signed in.'; toast('Signed in');
+  } catch(error) { authError('login',storageMessage(error)); }
+  finally { button.disabled = false; button.textContent = 'Sign in'; }
+});
+document.addEventListener('click',e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.auth) { clearAuthErrors(); authView(b.dataset.auth); }
+  if (b.dataset.password) {
+    const input = $(b.dataset.password), visible = input.type === 'password';
+    input.type = visible ? 'text' : 'password'; b.textContent = visible ? 'Hide' : 'Show';
+    b.setAttribute('aria-pressed',String(visible));
+    b.setAttribute('aria-label',(visible ? 'Hide ' : 'Show ')+(b.dataset.password === 'signupConfirm' ? 'confirm password' : 'password'));
+  }
+  if (b.id === 'accountNav') authView(currentUser ? 'profile' : 'signup');
+  if (b.id === 'logoutBtn') {
+    try { sessionStorage.removeItem(SESSION_KEY); } catch { toast('Could not sign out. Allow browser storage and try again.'); return; }
+    currentUser = null; cart = {}; orders = [];
+    $('checkoutForm').reset(); $('modal').classList.add('hidden');
+    renderCart(); renderOrders(); updateAccountUI(); clearAuthErrors(); authView('login'); toast('Signed out');
+  }
+  if (b.id === 'checkoutBtn' && currentUser) $('checkoutForm').elements.customer.value = currentUser.name;
+});
+
+renderProducts();renderCart();restoreAccount();
+</script>
+<noscript><p class="panel">Enable JavaScript to use the marketplace and create a demo account.</p></noscript>
+</body>
+</html>
